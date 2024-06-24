@@ -16,15 +16,13 @@ public class CarController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        rb = this.transform.GetComponent<Rigidbody>();
+        rb = this.GetComponent<Rigidbody>();
         useLight = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        //Debug.Log(rb.velocity.magnitude);
-
         //Rキー判定
         if (carInfo.useRHL && useLight == false && Input.GetKeyDown(KeyCode.L))
         {
@@ -39,13 +37,13 @@ public class CarController : MonoBehaviour
 
         foreach (WheelInfo wheelInfo in wheelInfo)
         {
-            wheelInfo.trLeftWheel.Rotate(wheelInfo.wcLeftWheel.rpm / 60 * 360 * Time.deltaTime, 0, 0);
-            wheelInfo.trRightWheel.Rotate(wheelInfo.wcRightWheel.rpm / 60 * 360 * Time.deltaTime, 0, 0);
+            wheelInfo.trLeft.Rotate(wheelInfo.wcLeft.rpm / 60 * 360 * Time.deltaTime, 0, 0);
+            wheelInfo.trRight.Rotate(wheelInfo.wcRight.rpm / 60 * 360 * Time.deltaTime, 0, 0);
 
             if (wheelInfo.useTorque)
             {
-                wheelInfo.trLeftWheel.localEulerAngles = new Vector3(wheelInfo.trLeftWheel.localEulerAngles.x, wheelInfo.wcLeftWheel.steerAngle - wheelInfo.trLeftWheel.localEulerAngles.z, wheelInfo.trLeftWheel.localEulerAngles.z);
-                wheelInfo.trRightWheel.localEulerAngles = new Vector3(wheelInfo.trRightWheel.localEulerAngles.x, wheelInfo.wcRightWheel.steerAngle - wheelInfo.trRightWheel.localEulerAngles.z, wheelInfo.trRightWheel.localEulerAngles.z);
+                wheelInfo.trLeft.localEulerAngles = new Vector3(wheelInfo.trLeft.localEulerAngles.x, wheelInfo.wcLeft.steerAngle - wheelInfo.trLeft.localEulerAngles.z, wheelInfo.trLeft.localEulerAngles.z);
+                wheelInfo.trRight.localEulerAngles = new Vector3(wheelInfo.trRight.localEulerAngles.x, wheelInfo.wcRight.steerAngle - wheelInfo.trRight.localEulerAngles.z, wheelInfo.trRight.localEulerAngles.z);
             }
         }
     }
@@ -61,8 +59,22 @@ public class CarController : MonoBehaviour
             {
                 if (wheelInfo.useTorque)
                 {
-                    wheelInfo.wcLeftWheel.motorTorque = accelerator;
-                    wheelInfo.wcRightWheel.motorTorque = accelerator;
+                    wheelInfo.wcLeft.motorTorque = accelerator;
+                    wheelInfo.wcRight.motorTorque = accelerator;
+                }
+            }
+        }
+        //Sキー判定
+        else if(Input.GetKey(KeyCode.S))
+        {
+            accelerator = carInfo.upTorque * -1;
+
+            foreach (WheelInfo wheelInfo in wheelInfo)
+            {
+                if (wheelInfo.useTorque)
+                {
+                    wheelInfo.wcLeft.motorTorque = accelerator;
+                    wheelInfo.wcRight.motorTorque = accelerator;
                 }
             }
         }
@@ -72,23 +84,41 @@ public class CarController : MonoBehaviour
             {
                 if (wheelInfo.useTorque)
                 {
-                    wheelInfo.wcLeftWheel.motorTorque = 0;
-                    wheelInfo.wcRightWheel.motorTorque = 0;
+                    wheelInfo.wcLeft.motorTorque = 0;
+                    wheelInfo.wcRight.motorTorque = 0;
                 }
             }
         }
-
-        //Sキー判定
-        if (Input.GetKey(KeyCode.S))
+        //左Shiftキー判定
+        if (Input.GetKey(KeyCode.LeftShift))
         {
             brake = carInfo.downTorque;
 
             foreach (WheelInfo wheelInfo in wheelInfo)
             {
-                if (wheelInfo.useTorque)
+                wheelInfo.wcLeft.brakeTorque = brake;
+                wheelInfo.wcRight.brakeTorque = brake;
+            }
+        }
+        else
+        {
+            foreach (WheelInfo wheelInfo in wheelInfo)
+            {
+                wheelInfo.wcLeft.brakeTorque = 0;
+                wheelInfo.wcRight.brakeTorque = 0;
+            }
+        }
+        //右Shiftキー判定
+        if (Input.GetKey(KeyCode.RightShift))
+        {
+            brake = carInfo.downTorque;
+
+            foreach (WheelInfo wheelInfo in wheelInfo)
+            {
+                if (wheelInfo.useSideBrake == true)
                 {
-                    wheelInfo.wcLeftWheel.brakeTorque = brake;
-                    wheelInfo.wcRightWheel.brakeTorque = brake;
+                    wheelInfo.wcLeft.brakeTorque = brake;
+                    wheelInfo.wcRight.brakeTorque = brake;
                 }
             }
         }
@@ -96,10 +126,10 @@ public class CarController : MonoBehaviour
         {
             foreach (WheelInfo wheelInfo in wheelInfo)
             {
-                if (wheelInfo.useTorque)
+                if (wheelInfo.useSideBrake == true)
                 {
-                    wheelInfo.wcLeftWheel.brakeTorque = 0;
-                    wheelInfo.wcRightWheel.brakeTorque = 0;
+                    wheelInfo.wcLeft.brakeTorque = 0;
+                    wheelInfo.wcRight.brakeTorque = 0;
                 }
             }
         }
@@ -113,8 +143,8 @@ public class CarController : MonoBehaviour
             {
                 if (wheelInfo.useSteering)
                 {
-                    wheelInfo.wcLeftWheel.steerAngle = steering;
-                    wheelInfo.wcRightWheel.steerAngle = steering;
+                    wheelInfo.wcLeft.steerAngle = steering;
+                    wheelInfo.wcRight.steerAngle = steering;
                 }
             }
         }
@@ -127,8 +157,8 @@ public class CarController : MonoBehaviour
             {
                 if (wheelInfo.useSteering)
                 {
-                    wheelInfo.wcLeftWheel.steerAngle = steering;
-                    wheelInfo.wcRightWheel.steerAngle = steering;
+                    wheelInfo.wcLeft.steerAngle = steering;
+                    wheelInfo.wcRight.steerAngle = steering;
                 }
             }
         }
@@ -138,8 +168,8 @@ public class CarController : MonoBehaviour
             {
                 if (wheelInfo.useSteering)
                 {
-                    wheelInfo.wcLeftWheel.steerAngle = 0;
-                    wheelInfo.wcRightWheel.steerAngle = 0;
+                    wheelInfo.wcLeft.steerAngle = 0;
+                    wheelInfo.wcRight.steerAngle = 0;
                 }
             }
         }
@@ -151,8 +181,8 @@ public class CarInfo
 {
     public Transform RHL;      //トランスフォーム型の変数（リトラクタブル・ヘッドライト用）
     public float maxTorque;    //最大トルク
-    public float upTorque;     //上昇トルク
-    public float downTorque;   //減少トルク
+    public float upTorque;     //加速トルク
+    public float downTorque;   //減速トルク
     public float steeringAngle;//ステアリングの初期値
     public bool useRHL;        //リトラクタブル・ヘッドライトを使うか
 }
@@ -160,12 +190,13 @@ public class CarInfo
 [System.Serializable]
 public class WheelInfo
 {
-    public Transform trLeftWheel;
-    public Transform trRightWheel;
-    public WheelCollider wcLeftWheel;
-    public WheelCollider wcRightWheel;
-    public bool useTorque;  //トルクの影響を受けるか
-    public bool useSteering;//ハンドル操作の影響を受けるか
+    public Transform trLeft;
+    public Transform trRight;
+    public WheelCollider wcLeft;
+    public WheelCollider wcRight;
+    public bool useTorque;   //トルクの影響を受けるか
+    public bool useSteering; //ハンドル操作の影響を受けるか
+    public bool useSideBrake;//再度ブレーキの影響を受けるか
 }
 
 
