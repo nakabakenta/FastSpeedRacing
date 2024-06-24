@@ -4,64 +4,75 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    
-    private Vector3 nowCameraPos;//現在のカメラ座標
-    private int nowCameraNo;     //現在のカメラ番号
-    public CameraInfo cameraInfo;//車の情報
+    private int useCamera;       //使用中のカメラ
+    public CameraInfo cameraInfo;//カメラ情報
 
     // Start is called before the first frame update
     void Start()
     {
-        nowCameraPos = cameraInfo.upFrontCameraPos;
-        this.transform.position += nowCameraPos;
-        nowCameraNo = 1;
+        useCamera = 1;
+        cameraInfo.objUpFront.SetActive(false);
+        cameraInfo.objBack.SetActive(false);
+        cameraInfo.objUpBack.SetActive(false);
+        cameraInfo.objSide.SetActive(false);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (nowCameraNo >= 1 && nowCameraNo <= 2)
-        {
-            this.transform.localEulerAngles = new Vector3(0, 0, 0);
-        }
-        else if (nowCameraNo >= 3 && nowCameraNo <= 5)
-        {
-            this.transform.localEulerAngles = new Vector3(0, 180, 0);
-        }
-
         //カメラの切り替え
-        //F1キー
+        //F5キー
         if (Input.GetKeyDown(KeyCode.F5))
         {
-            if (nowCameraNo == 5)
+            if (useCamera == 5)
             {
-                nowCameraNo = 1;
+                useCamera = 1;
             }
             else
             {
-                nowCameraNo++;
+                useCamera++;
             }
         }
 
-        if (nowCameraNo == 1)
+        if (useCamera == 1)
         {
-            nowCameraPos = cameraInfo.frontCameraPos;
+            cameraInfo.objFront.SetActive(true);
+            cameraInfo.objUpFront.SetActive(false);
+            cameraInfo.objBack.SetActive(false);
+            cameraInfo.objUpBack.SetActive(false);
+            cameraInfo.objSide.SetActive(false);
         }
-        else if (nowCameraNo == 2)
+        else if (useCamera == 2)
         {
-            nowCameraPos = cameraInfo.upFrontCameraPos;
+            cameraInfo.objFront.SetActive(false);
+            cameraInfo.objUpFront.SetActive(true);
+            cameraInfo.objBack.SetActive(false);
+            cameraInfo.objUpBack.SetActive(false);
+            cameraInfo.objSide.SetActive(false);
         }
-        else if (nowCameraNo == 3)
+        else if (useCamera == 3)
         {
-            nowCameraPos = cameraInfo.backCameraPos;
+            cameraInfo.objFront.SetActive(false);
+            cameraInfo.objUpFront.SetActive(false);
+            cameraInfo.objBack.SetActive(true);
+            cameraInfo.objUpBack.SetActive(false);
+            cameraInfo.objSide.SetActive(false);
         }
-        else if (nowCameraNo == 4)
+        else if (useCamera == 4)
         {
-            nowCameraPos = cameraInfo.upBackCameraPos;
+            cameraInfo.objFront.SetActive(false);
+            cameraInfo.objUpFront.SetActive(false);
+            cameraInfo.objBack.SetActive(false);
+            cameraInfo.objUpBack.SetActive(true);
+            cameraInfo.objSide.SetActive(false);
         }
-        else if (nowCameraNo == 5)
+        else if (useCamera == 5)
         {
-            nowCameraPos = cameraInfo.sideCameraPos;
+            cameraInfo.objFront.SetActive(false);
+            cameraInfo.objUpFront.SetActive(false);
+            cameraInfo.objBack.SetActive(false);
+            cameraInfo.objUpBack.SetActive(false);
+            cameraInfo.objSide.SetActive(true);
         }
     }
 }
@@ -69,11 +80,9 @@ public class CameraController : MonoBehaviour
 [System.Serializable]
 public class CameraInfo
 {
-    public GameObject followObj;    //追従するオブジェクト
-    public GameObject camera;       //使うオブジェクト（カメラ）
-    public Vector3 frontCameraPos;  //カメラの位置（前）
-    public Vector3 upFrontCameraPos;//カメラの位置（上前）
-    public Vector3 backCameraPos;   //カメラの位置（後）
-    public Vector3 upBackCameraPos; //カメラの位置（上後）
-    public Vector3 sideCameraPos;   //カメラの位置（横）
+    public GameObject objFront;  //カメラ（前）
+    public GameObject objUpFront;//カメラ（上前）
+    public GameObject objBack;   //カメラ（後）
+    public GameObject objUpBack; //カメラ（上後）
+    public GameObject objSide;   //カメラ（横）
 }
