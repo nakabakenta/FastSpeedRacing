@@ -4,7 +4,7 @@ using UnityEngine;
 //using UnityEngine.UI;
 using TMPro;
 
-public class UI_GameMode : MonoBehaviour
+public class UIGame : MonoBehaviour
 {
     public GameObject objCar;
     public TMP_Text textTimer;
