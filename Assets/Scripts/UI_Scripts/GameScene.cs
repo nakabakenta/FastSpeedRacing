@@ -16,8 +16,6 @@ public class GameScene : MonoBehaviour
     private float countdown;
     private float timer;
 
-    public static string GameState;
-
     // Start is called before the first frame update
     void Start()
     {
