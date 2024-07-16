@@ -2773,6 +2773,7 @@ GameObject:
   - component: {fileID: 1965234187}
   - component: {fileID: 1965234188}
   - component: {fileID: 1965234186}
+  - component: {fileID: 1965234192}
   - component: {fileID: 1965234191}
   m_Layer: 0
   m_Name: "AE86\u30C8\u30EC\u30CE"
@@ -2886,6 +2887,18 @@ MonoBehaviour:
     objBack: {fileID: 1331044340}
     objUpBack: {fileID: 2132884860}
     objSide: {fileID: 1360882919}
+--- !u!114 &1965234192
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1965234183}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9cbf9588c7938314e940e1a7647dcb7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2105524141
 GameObject:
   m_ObjectHideFlags: 0
