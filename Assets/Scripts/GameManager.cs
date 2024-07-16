@@ -1,27 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public enum GameState
-{
-    GameStart,
-    GamePlaying,
-    GameMenu,
-    GameClear,
-    GameOver,
-}
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public static string GameState = "Title";
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetKey(KeyCode.Return) && GameState == "Title")
+        {
+            SceneManager.LoadScene("StageSelect");
+            GameState = "StageSelect";
+        }
     }
 }

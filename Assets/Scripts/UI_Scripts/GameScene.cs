@@ -29,8 +29,13 @@ public class GameScene : MonoBehaviour
     void Update()
     {
         Countdown();
-        Timer();
+
+        if (GameManager.GameState == "GamePlaying")
+        {
+            Timer();
+        }
     }
+
     void FixedUpdate()
     {
         textSpeedMeter.text = Mathf.Floor(rb.velocity.magnitude * 10) / 10 + " Km/h";
@@ -52,6 +57,7 @@ public class GameScene : MonoBehaviour
         if(second <= -2)
         {
             objCountdown.SetActive(false);
+            GameManager.GameState = "GamePlaying";
         }
     }
     void Timer()
