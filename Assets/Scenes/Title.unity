@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.12731749, g: 0.13414757, b: 0.1210787, a: 1}
+  m_IndirectSpecularColor: {r: 0.1273174, g: 0.13414761, b: 0.12107885, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -250,7 +250,7 @@ GameObject:
   - component: {fileID: 1238721240}
   - component: {fileID: 1238721239}
   m_Layer: 5
-  m_Name: "\u30BF\u30A4\u30C8\u30EB"
+  m_Name: Title
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -621,8 +621,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: PLEASE  PUSH  ENTER  KEY
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2100000, guid: 994b7a989571ea5449a89daf482259fa, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 1981e65fd1a13a04995f3016837bbbd3, type: 2}
+  m_sharedMaterial: {fileID: -1565291568412411801, guid: 1981e65fd1a13a04995f3016837bbbd3, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
