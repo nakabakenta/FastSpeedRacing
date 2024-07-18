@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028334, g: 0.2257134, b: 0.30692226, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -290,7 +290,7 @@ RectTransform:
   m_Children:
   - {fileID: 450120215}
   m_Father: {fileID: 1770606388}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -919,7 +919,7 @@ RectTransform:
   m_Children:
   - {fileID: 1755848603}
   m_Father: {fileID: 1770606388}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1768,7 +1768,7 @@ RectTransform:
   m_Children:
   - {fileID: 1579260248}
   m_Father: {fileID: 1770606388}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1848,7 +1848,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -450}
+  m_AnchoredPosition: {x: 0, y: -475}
   m_SizeDelta: {x: 1920, y: 5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1294497209
@@ -2068,7 +2068,7 @@ RectTransform:
   m_Children:
   - {fileID: 543603490}
   m_Father: {fileID: 1770606388}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -2145,7 +2145,7 @@ RectTransform:
   m_Children:
   - {fileID: 1060140811}
   m_Father: {fileID: 1770606388}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -2891,6 +2891,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1837532390}
   - {fileID: 1862767840}
   - {fileID: 708604461}
   - {fileID: 1411168821}
@@ -2996,7 +2997,7 @@ GameObject:
   - component: {fileID: 1837532392}
   - component: {fileID: 1837532391}
   m_Layer: 5
-  m_Name: "\u30C6\u30AD\u30B9\u30C8_W"
+  m_Name: UP
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3014,12 +3015,12 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1862767840}
-  m_RootOrder: 1
+  m_Father: {fileID: 1770606388}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 38.5, y: 0}
+  m_AnchoredPosition: {x: -109.3, y: -510}
   m_SizeDelta: {x: 1920, y: 1080}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1837532391
@@ -3042,7 +3043,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: ' : UP'
+  m_text: UP
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 1f2cbe3fc259bbb44b4f3ae0cde8da58, type: 2}
   m_sharedMaterial: {fileID: 136850159769949897, guid: 1f2cbe3fc259bbb44b4f3ae0cde8da58, type: 2}
@@ -3150,14 +3151,13 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 466087605}
-  - {fileID: 1837532390}
   m_Father: {fileID: 1770606388}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -52.1, y: -500}
-  m_SizeDelta: {x: 30, y: 30}
+  m_AnchoredPosition: {x: -65.2, y: -510}
+  m_SizeDelta: {x: 25, y: 25}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1862767841
 MonoBehaviour:
