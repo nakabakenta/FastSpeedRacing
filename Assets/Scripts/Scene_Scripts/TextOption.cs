@@ -3,16 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class Text : MonoBehaviour
+public class TextOption : MonoBehaviour
 {
     private TMP_Text text;
+
+    public TextOptionInfo textOptionInfo;//使用するテキスト設定
 
     // Start is called before the first frame update
     void Start()
     {
         text = this.gameObject.GetComponent<TMP_Text>();
-        text.color = new Color(0.0f, 0.0f, 0.0f, 1.0f);
-        StartCoroutine("Flashing");
+
+        if (textOptionInfo.textFlashing == true)
+        {
+            StartCoroutine("Flashing");
+        }
     }
 
     IEnumerator Flashing()
@@ -32,4 +37,10 @@ public class Text : MonoBehaviour
             }
         }
     }
+}
+
+[System.Serializable]
+public class TextOptionInfo
+{
+    public bool textFlashing;//テキストの点滅
 }

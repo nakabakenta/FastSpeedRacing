@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.1273174, g: 0.13414761, b: 0.12107885, a: 1}
+  m_IndirectSpecularColor: {r: 0.12731749, g: 0.13414757, b: 0.1210787, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -235,7 +235,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1077338352}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3efce4d5823f6194090309427fba1977, type: 3}
+  m_Script: {fileID: 11500000, guid: 31bb1da4c9c496940b7ed3c15907ae19, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1238721237
@@ -622,14 +622,14 @@ MonoBehaviour:
   m_text: PLEASE  PUSH  ENTER  KEY
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 1981e65fd1a13a04995f3016837bbbd3, type: 2}
-  m_sharedMaterial: {fileID: -1565291568412411801, guid: 1981e65fd1a13a04995f3016837bbbd3, type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: 4c27e1a1b4c967b408feac481bc60495, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278190080
-  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -646,13 +646,13 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 64
-  m_fontSizeBase: 64
+  m_fontSize: 48
+  m_fontSizeBase: 48
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 2
+  m_fontStyle: 3
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -708,6 +708,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 136dc23ea614a5d46a68c7c502aa3b01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  textOptionInfo:
+    textFlashing: 1
 --- !u!1001 &689980166400566300
 PrefabInstance:
   m_ObjectHideFlags: 0

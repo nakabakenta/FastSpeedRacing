@@ -23,16 +23,19 @@ public class CarController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //Rキー判定
-        if (carInfo.useRHL && useLight == false && Input.GetKeyDown(KeyCode.L))
+        if(GameManager.gameState == "Playing" && GameManager.pauseMenuState == "Null")
         {
-            carInfo.RHL.localEulerAngles = new Vector3(-90, 0, 0);
-            useLight = true;
-        }
-        else if (carInfo.useRHL && useLight == true && Input.GetKeyDown(KeyCode.L))
-        {
-            carInfo.RHL.localEulerAngles = new Vector3(0, 0, 0);
-            useLight = false;
+            //Rキー判定
+            if (carInfo.useRHL && useLight == false && Input.GetKeyDown(KeyCode.L))
+            {
+                carInfo.RHL.localEulerAngles = new Vector3(-90, 0, 0);
+                useLight = true;
+            }
+            else if (carInfo.useRHL && useLight == true && Input.GetKeyDown(KeyCode.L))
+            {
+                carInfo.RHL.localEulerAngles = new Vector3(0, 0, 0);
+                useLight = false;
+            }
         }
 
         foreach (WheelInfo wheelInfo in wheelInfo)
@@ -50,66 +53,133 @@ public class CarController : MonoBehaviour
 
     void FixedUpdate()
     {
-        //Wキー判定
-        if (Input.GetKey(KeyCode.W))
+        if(GameManager.gameState == "Playing" && GameManager.pauseMenuState == "Null")
         {
-            accelerator = carInfo.upTorque;
-
-            foreach (WheelInfo wheelInfo in wheelInfo)
+            //Wキー判定
+            if (Input.GetKey(KeyCode.W))
             {
-                if (wheelInfo.useTorque)
+                accelerator = carInfo.upTorque;
+
+                foreach (WheelInfo wheelInfo in wheelInfo)
                 {
-                    wheelInfo.wcLeft.motorTorque = accelerator;
-                    wheelInfo.wcRight.motorTorque = accelerator;
+                    if (wheelInfo.useTorque)
+                    {
+                        wheelInfo.wcLeft.motorTorque = accelerator;
+                        wheelInfo.wcRight.motorTorque = accelerator;
+                    }
+                }
+            }
+            //Sキー判定
+            else if (Input.GetKey(KeyCode.S))
+            {
+                accelerator = carInfo.upTorque * -1;
+
+                foreach (WheelInfo wheelInfo in wheelInfo)
+                {
+                    if (wheelInfo.useTorque)
+                    {
+                        wheelInfo.wcLeft.motorTorque = accelerator;
+                        wheelInfo.wcRight.motorTorque = accelerator;
+                    }
+                }
+            }
+            else
+            {
+                foreach (WheelInfo wheelInfo in wheelInfo)
+                {
+                    if (wheelInfo.useTorque)
+                    {
+                        wheelInfo.wcLeft.motorTorque = 0;
+                        wheelInfo.wcRight.motorTorque = 0;
+                    }
+                }
+            }
+            //左Shiftキー判定
+            if (Input.GetKey(KeyCode.LeftShift))
+            {
+                brake = carInfo.downTorque;
+
+                foreach (WheelInfo wheelInfo in wheelInfo)
+                {
+                    wheelInfo.wcLeft.brakeTorque = brake;
+                    wheelInfo.wcRight.brakeTorque = brake;
+                }
+            }
+            else
+            {
+                foreach (WheelInfo wheelInfo in wheelInfo)
+                {
+                    wheelInfo.wcLeft.brakeTorque = 0;
+                    wheelInfo.wcRight.brakeTorque = 0;
+                }
+            }
+            //右Shiftキー判定
+            if (Input.GetKey(KeyCode.RightShift))
+            {
+                brake = carInfo.downTorque;
+
+                foreach (WheelInfo wheelInfo in wheelInfo)
+                {
+                    if (wheelInfo.useSideBrake == true)
+                    {
+                        wheelInfo.wcLeft.brakeTorque = brake;
+                        wheelInfo.wcRight.brakeTorque = brake;
+                    }
+                }
+            }
+            else
+            {
+                foreach (WheelInfo wheelInfo in wheelInfo)
+                {
+                    if (wheelInfo.useSideBrake == true)
+                    {
+                        wheelInfo.wcLeft.brakeTorque = 0;
+                        wheelInfo.wcRight.brakeTorque = 0;
+                    }
+                }
+            }
+
+            //Aキー判定
+            if (Input.GetKey(KeyCode.A))
+            {
+                steering = carInfo.steeringAngle * -1;
+
+                foreach (WheelInfo wheelInfo in wheelInfo)
+                {
+                    if (wheelInfo.useSteering)
+                    {
+                        wheelInfo.wcLeft.steerAngle = steering;
+                        wheelInfo.wcRight.steerAngle = steering;
+                    }
+                }
+            }
+            //Dキー判定
+            else if (Input.GetKey(KeyCode.D))
+            {
+                steering = carInfo.steeringAngle;
+
+                foreach (WheelInfo wheelInfo in wheelInfo)
+                {
+                    if (wheelInfo.useSteering)
+                    {
+                        wheelInfo.wcLeft.steerAngle = steering;
+                        wheelInfo.wcRight.steerAngle = steering;
+                    }
+                }
+            }
+            else
+            {
+                foreach (WheelInfo wheelInfo in wheelInfo)
+                {
+                    if (wheelInfo.useSteering)
+                    {
+                        wheelInfo.wcLeft.steerAngle = 0;
+                        wheelInfo.wcRight.steerAngle = 0;
+                    }
                 }
             }
         }
-        //Sキー判定
-        else if(Input.GetKey(KeyCode.S))
-        {
-            accelerator = carInfo.upTorque * -1;
-
-            foreach (WheelInfo wheelInfo in wheelInfo)
-            {
-                if (wheelInfo.useTorque)
-                {
-                    wheelInfo.wcLeft.motorTorque = accelerator;
-                    wheelInfo.wcRight.motorTorque = accelerator;
-                }
-            }
-        }
-        else
-        {
-            foreach (WheelInfo wheelInfo in wheelInfo)
-            {
-                if (wheelInfo.useTorque)
-                {
-                    wheelInfo.wcLeft.motorTorque = 0;
-                    wheelInfo.wcRight.motorTorque = 0;
-                }
-            }
-        }
-        //左Shiftキー判定
-        if (Input.GetKey(KeyCode.LeftShift))
-        {
-            brake = carInfo.downTorque;
-
-            foreach (WheelInfo wheelInfo in wheelInfo)
-            {
-                wheelInfo.wcLeft.brakeTorque = brake;
-                wheelInfo.wcRight.brakeTorque = brake;
-            }
-        }
-        else
-        {
-            foreach (WheelInfo wheelInfo in wheelInfo)
-            {
-                wheelInfo.wcLeft.brakeTorque = 0;
-                wheelInfo.wcRight.brakeTorque = 0;
-            }
-        }
-        //右Shiftキー判定
-        if (Input.GetKey(KeyCode.RightShift))
+        else if(GameManager.gameState == "Goal")
         {
             brake = carInfo.downTorque;
 
@@ -119,57 +189,6 @@ public class CarController : MonoBehaviour
                 {
                     wheelInfo.wcLeft.brakeTorque = brake;
                     wheelInfo.wcRight.brakeTorque = brake;
-                }
-            }
-        }
-        else
-        {
-            foreach (WheelInfo wheelInfo in wheelInfo)
-            {
-                if (wheelInfo.useSideBrake == true)
-                {
-                    wheelInfo.wcLeft.brakeTorque = 0;
-                    wheelInfo.wcRight.brakeTorque = 0;
-                }
-            }
-        }
-
-        //Aキー判定
-        if (Input.GetKey(KeyCode.A))
-        {
-            steering = carInfo.steeringAngle * -1;
-
-            foreach (WheelInfo wheelInfo in wheelInfo)
-            {
-                if (wheelInfo.useSteering)
-                {
-                    wheelInfo.wcLeft.steerAngle = steering;
-                    wheelInfo.wcRight.steerAngle = steering;
-                }
-            }
-        }
-        //Dキー判定
-        else if (Input.GetKey(KeyCode.D))
-        {
-            steering = carInfo.steeringAngle;
-
-            foreach (WheelInfo wheelInfo in wheelInfo)
-            {
-                if (wheelInfo.useSteering)
-                {
-                    wheelInfo.wcLeft.steerAngle = steering;
-                    wheelInfo.wcRight.steerAngle = steering;
-                }
-            }
-        }
-        else
-        {
-            foreach (WheelInfo wheelInfo in wheelInfo)
-            {
-                if (wheelInfo.useSteering)
-                {
-                    wheelInfo.wcLeft.steerAngle = 0;
-                    wheelInfo.wcRight.steerAngle = 0;
                 }
             }
         }

@@ -20,7 +20,7 @@ public class CarCollision : MonoBehaviour
     {
         if (collider.gameObject.tag == "Goal")
         {
-            
+            GameManager.gameState = "Goal";
         }
     }
 }

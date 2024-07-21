@@ -1,0 +1,23 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.SceneManagement;
+
+public class Title : MonoBehaviour
+{
+    // Start is called before the first frame update
+    void Start()
+    {
+        GameManager.nowScene = "Title";
+        GameManager.titleState = "Waiting";
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Return) && GameManager.titleState == "Waiting")
+        {
+            SceneManager.LoadScene("StageSelect");
+        }
+    }
+}
