@@ -12,5 +12,7 @@ public class GameManager : MonoBehaviour
     public static string returnMenuState; //リターンメニューの状況
     public static string gameState;       //ゲームの状況
     public static string countdownState;  //カウントダウンの状況
-    public static string pauseMenuState;  //リターンメニューの状況
+    public static string pauseMenuState;  //ポーズメニューの状況
+    public static string restartMenuState;//リスタートメニューの状況
+    public static string backToMenuState; //ステージセレクトに戻るメニューの状況
 }

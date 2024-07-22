@@ -10,8 +10,8 @@ public class Stage : MonoBehaviour
     private Rigidbody rb;
     private float countdown;
     private float timer;
+    private string saveState;
 
-    public string saveGameState;
     public StageInfo stageInfo;
 
     // Start is called before the first frame update
@@ -22,7 +22,11 @@ public class Stage : MonoBehaviour
         GameManager.gameState = "Countdown";
         GameManager.countdownState = "Exist";
         GameManager.pauseMenuState = "Null";
+        GameManager.restartMenuState = "Null";
+        GameManager.backToMenuState = "Null";
         stageInfo.objPauseMenu.SetActive(false);
+        stageInfo.objRestartMenu.SetActive(false);
+        stageInfo.objBackToMenu.SetActive(false);
         stageInfo.objGoal.SetActive(false);
         countdown = 4;
         timer = 0;
@@ -45,23 +49,52 @@ public class Stage : MonoBehaviour
         }
 
         if (Input.GetKeyDown(KeyCode.Escape) && GameManager.nowScene == "Stage"
-            && GameManager.pauseMenuState == "Null")
+            && GameManager.gameState != "Goal" && GameManager.pauseMenuState == "Null")
         {
-            saveGameState = GameManager.gameState;
+            saveState = GameManager.gameState;
             GameManager.gameState = "PauseMenu";
             GameManager.pauseMenuState = "Exist";
             stageInfo.objPauseMenu.SetActive(true);
-            EventSystem.current.SetSelectedGameObject(stageInfo.objFirstButtonSelect);
+            EventSystem.current.SetSelectedGameObject(stageInfo.objPauseMenuFirstButtonSelect);
+            Time.timeScale = 0;
         }
 
         if(GameManager.pauseMenuState == "BackToGame")
         {
-            GameManager.gameState = saveGameState;
+            GameManager.gameState = saveState;
             GameManager.pauseMenuState = "Null";
             stageInfo.objPauseMenu.SetActive(false);
+            Time.timeScale = 1;
+        }
+
+        if (GameManager.pauseMenuState == "Restart" && GameManager.restartMenuState == "Null")
+        {
+            GameManager.restartMenuState = "Exist";
+            stageInfo.objPauseMenu.SetActive(false);
+            stageInfo.objRestartMenu.SetActive(true);
+            EventSystem.current.SetSelectedGameObject(stageInfo.objRestartMenuFirstButtonSelect);
+        }
+
+        if (GameManager.pauseMenuState == "BackToMenu" && GameManager.backToMenuState == "Null")
+        {
+            GameManager.backToMenuState = "Exist";
+            stageInfo.objPauseMenu.SetActive(false);
+            stageInfo.objBackToMenu.SetActive(true);
+            EventSystem.current.SetSelectedGameObject(stageInfo.objBackToMenuFirstButtonSelect);
+        }
+
+        if (GameManager.pauseMenuState == "No")
+        {
+            GameManager.gameState = "PauseMenu";
+            GameManager.pauseMenuState = "Exist";
+            GameManager.restartMenuState = "Null";
+            GameManager.backToMenuState = "Null";
+            stageInfo.objRestartMenu.SetActive(false);
+            stageInfo.objBackToMenu.SetActive(false);
+            stageInfo.objPauseMenu.SetActive(true);
+            EventSystem.current.SetSelectedGameObject(stageInfo.objPauseMenuFirstButtonSelect);
         }
     }
-
     void FixedUpdate()
     {
         stageInfo.textSpeedMeter.text = Mathf.Floor(rb.velocity.magnitude * 10) / 10 + " Km/h";
@@ -136,7 +169,12 @@ public class StageInfo
     public GameObject objCountdown;
     public GameObject objGoal;
     public GameObject objPauseMenu;
-    public GameObject objFirstButtonSelect;
+    public GameObject objPauseMenuFirstButtonSelect;
+    public GameObject objRestartMenu;
+    public GameObject objRestartMenuFirstButtonSelect;
+    public GameObject objBackToMenu;
+    public GameObject objBackToMenuFirstButtonSelect;
+
     public TMP_Text textCountdown;
     public TMP_Text textNowTimer;
     public TMP_Text textSpeedMeter;
