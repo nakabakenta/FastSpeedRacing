@@ -22,7 +22,7 @@ public class CameraController : MonoBehaviour
     {
         //ƒJƒƒ‰‚ÌØ‚è‘Ö‚¦
         //F5ƒL[
-        if (Input.GetKeyDown(KeyCode.F5))
+        if (Input.GetKeyDown(KeyCode.F5) && GameManager.gameState != "Goal")
         {
             if (useCamera == 5)
             {

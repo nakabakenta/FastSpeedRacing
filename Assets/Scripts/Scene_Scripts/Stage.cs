@@ -22,12 +22,18 @@ public class Stage : MonoBehaviour
         GameManager.gameState = "Countdown";
         GameManager.countdownState = "Exist";
         GameManager.pauseMenuState = "Null";
+        GameManager.controlGuideMenuState = "Null";
         GameManager.restartMenuState = "Null";
         GameManager.backToMenuState = "Null";
+        GameManager.stageClearMenuState = "Null";
+
+        stageInfo.objCountdown.SetActive(true);
+        stageInfo.objGoal.SetActive(false);
         stageInfo.objPauseMenu.SetActive(false);
+        stageInfo.objControlGuideMenu.SetActive(false);
         stageInfo.objRestartMenu.SetActive(false);
         stageInfo.objBackToMenu.SetActive(false);
-        stageInfo.objGoal.SetActive(false);
+        stageInfo.objStageClearMenu.SetActive(false);
         countdown = 4;
         timer = 0;
     }
@@ -43,56 +49,14 @@ public class Stage : MonoBehaviour
         {
             Timer();
         }
+        if (GameManager.countdownState == "Exist" || GameManager.countdownState == "Go" 
+            && GameManager.gameState != "Goal")
+        {
+            PauseMenu();
+        }
         if (GameManager.gameState == "Goal")
         {
             Goal();
-        }
-
-        if (Input.GetKeyDown(KeyCode.Escape) && GameManager.nowScene == "Stage"
-            && GameManager.gameState != "Goal" && GameManager.pauseMenuState == "Null")
-        {
-            saveState = GameManager.gameState;
-            GameManager.gameState = "PauseMenu";
-            GameManager.pauseMenuState = "Exist";
-            stageInfo.objPauseMenu.SetActive(true);
-            EventSystem.current.SetSelectedGameObject(stageInfo.objPauseMenuFirstButtonSelect);
-            Time.timeScale = 0;
-        }
-
-        if(GameManager.pauseMenuState == "BackToGame")
-        {
-            GameManager.gameState = saveState;
-            GameManager.pauseMenuState = "Null";
-            stageInfo.objPauseMenu.SetActive(false);
-            Time.timeScale = 1;
-        }
-
-        if (GameManager.pauseMenuState == "Restart" && GameManager.restartMenuState == "Null")
-        {
-            GameManager.restartMenuState = "Exist";
-            stageInfo.objPauseMenu.SetActive(false);
-            stageInfo.objRestartMenu.SetActive(true);
-            EventSystem.current.SetSelectedGameObject(stageInfo.objRestartMenuFirstButtonSelect);
-        }
-
-        if (GameManager.pauseMenuState == "BackToMenu" && GameManager.backToMenuState == "Null")
-        {
-            GameManager.backToMenuState = "Exist";
-            stageInfo.objPauseMenu.SetActive(false);
-            stageInfo.objBackToMenu.SetActive(true);
-            EventSystem.current.SetSelectedGameObject(stageInfo.objBackToMenuFirstButtonSelect);
-        }
-
-        if (GameManager.pauseMenuState == "No")
-        {
-            GameManager.gameState = "PauseMenu";
-            GameManager.pauseMenuState = "Exist";
-            GameManager.restartMenuState = "Null";
-            GameManager.backToMenuState = "Null";
-            stageInfo.objRestartMenu.SetActive(false);
-            stageInfo.objBackToMenu.SetActive(false);
-            stageInfo.objPauseMenu.SetActive(true);
-            EventSystem.current.SetSelectedGameObject(stageInfo.objPauseMenuFirstButtonSelect);
         }
     }
     void FixedUpdate()
@@ -156,9 +120,114 @@ public class Stage : MonoBehaviour
 
         stageInfo.textNowTimer.text = "NowTime : " + minText + "." + secText + "." + msecText;
     }
+    void PauseMenu()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape) && GameManager.pauseMenuState == "Null")
+        {
+            saveState = GameManager.gameState;
+            GameManager.gameState = "PauseMenu";
+            GameManager.pauseMenuState = "Exist";
+            stageInfo.objPauseMenu.SetActive(true);
+            EventSystem.current.SetSelectedGameObject(stageInfo.objPauseMenuFirstButtonSelect);
+            Time.timeScale = 0;
+        }
+
+        if (GameManager.pauseMenuState == "BackToGame")
+        {
+            GameManager.gameState = saveState;
+            GameManager.pauseMenuState = "Null";
+            stageInfo.objPauseMenu.SetActive(false);
+            Time.timeScale = 1;
+        }
+
+        if (GameManager.pauseMenuState == "ControlGuide" && GameManager.controlGuideMenuState == "Null")
+        {
+            GameManager.controlGuideMenuState = "Exist";
+            stageInfo.objPauseMenu.SetActive(false);
+            stageInfo.objControlGuideMenu.SetActive(true);
+        }
+        else if (Input.GetKeyDown(KeyCode.Escape) && GameManager.pauseMenuState == "ControlGuide"
+            && GameManager.controlGuideMenuState == "Exist")
+        {
+            GameManager.pauseMenuState = "No";
+        }
+
+        if (GameManager.pauseMenuState == "Restart" && GameManager.restartMenuState == "Null")
+        {
+            GameManager.restartMenuState = "Exist";
+            stageInfo.objPauseMenu.SetActive(false);
+            stageInfo.objRestartMenu.SetActive(true);
+            EventSystem.current.SetSelectedGameObject(stageInfo.objRestartMenuFirstButtonSelect);
+        }
+
+        if (GameManager.pauseMenuState == "BackToMenu" && GameManager.backToMenuState == "Null")
+        {
+            GameManager.backToMenuState = "Exist";
+            stageInfo.objPauseMenu.SetActive(false);
+            stageInfo.objBackToMenu.SetActive(true);
+            EventSystem.current.SetSelectedGameObject(stageInfo.objBackToMenuFirstButtonSelect);
+        }
+
+        if (GameManager.pauseMenuState == "No")
+        {
+            GameManager.gameState = "PauseMenu";
+            GameManager.pauseMenuState = "Exist";
+            GameManager.controlGuideMenuState = "Null";
+            GameManager.restartMenuState = "Null";
+            GameManager.backToMenuState = "Null";
+            stageInfo.objControlGuideMenu.SetActive(false);
+            stageInfo.objRestartMenu.SetActive(false);
+            stageInfo.objBackToMenu.SetActive(false);
+            stageInfo.objPauseMenu.SetActive(true);
+            EventSystem.current.SetSelectedGameObject(stageInfo.objPauseMenuFirstButtonSelect);
+        }
+    }
     void Goal()
     {
         stageInfo.objGoal.SetActive(true);
+
+        if (GameManager.gameState == "Goal" && GameManager.stageClearMenuState == "Null")
+        {
+            Invoke("GoalMenu", 3.0f);
+        }
+
+        if (GameManager.stageClearMenuState == "Restart" && GameManager.restartMenuState == "Null")
+        {
+            GameManager.restartMenuState = "Exist";
+            stageInfo.objStageClearMenu.SetActive(false);
+            stageInfo.objRestartMenu.SetActive(true);
+            EventSystem.current.SetSelectedGameObject(stageInfo.objRestartMenuFirstButtonSelect);
+        }
+
+        if (GameManager.stageClearMenuState == "BackToMenu" && GameManager.backToMenuState == "Null")
+        {
+            GameManager.backToMenuState = "Exist";
+            stageInfo.objStageClearMenu.SetActive(false);
+            stageInfo.objBackToMenu.SetActive(true);
+            EventSystem.current.SetSelectedGameObject(stageInfo.objBackToMenuFirstButtonSelect);
+        }
+
+        if (GameManager.stageClearMenuState == "No")
+        {
+            GameManager.stageClearMenuState = "Exist";
+            GameManager.restartMenuState = "Null";
+            GameManager.backToMenuState = "Null";
+            stageInfo.objRestartMenu.SetActive(false);
+            stageInfo.objBackToMenu.SetActive(false);
+            stageInfo.objStageClearMenu.SetActive(true);
+            EventSystem.current.SetSelectedGameObject(stageInfo.objStageClearMenuFirstButtonSelect);
+        }
+    }
+    void GoalMenu()
+    {
+        stageInfo.objGoal.SetActive(false);
+
+        if (GameManager.stageClearMenuState == "Null")
+        {
+            GameManager.stageClearMenuState = "Exist";
+            stageInfo.objStageClearMenu.SetActive(true);
+            EventSystem.current.SetSelectedGameObject(stageInfo.objStageClearMenuFirstButtonSelect);
+        }
     }
 }
 
@@ -170,10 +239,13 @@ public class StageInfo
     public GameObject objGoal;
     public GameObject objPauseMenu;
     public GameObject objPauseMenuFirstButtonSelect;
+    public GameObject objControlGuideMenu;
     public GameObject objRestartMenu;
     public GameObject objRestartMenuFirstButtonSelect;
     public GameObject objBackToMenu;
     public GameObject objBackToMenuFirstButtonSelect;
+    public GameObject objStageClearMenu;
+    public GameObject objStageClearMenuFirstButtonSelect;
 
     public TMP_Text textCountdown;
     public TMP_Text textNowTimer;

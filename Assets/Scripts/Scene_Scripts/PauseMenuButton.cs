@@ -15,7 +15,14 @@ public class PauseMenuButton : MonoBehaviour
     }
     public void Restart()
     {
-        GameManager.pauseMenuState = "Restart";
+        if (GameManager.gameState == "PauseMenu")
+        {
+            GameManager.pauseMenuState = "Restart";
+        }
+        else if (GameManager.gameState == "Goal")
+        {
+            GameManager.stageClearMenuState = "Restart";
+        }
     }
 
     public void RestartYes()
@@ -45,7 +52,14 @@ public class PauseMenuButton : MonoBehaviour
     }
     public void BackToMenu()
     {
-        GameManager.pauseMenuState = "BackToMenu";
+        if (GameManager.gameState == "PauseMenu")
+        {
+            GameManager.pauseMenuState = "BackToMenu";
+        }
+        else if (GameManager.gameState == "Goal")
+        {
+            GameManager.stageClearMenuState = "BackToMenu";
+        }
     }
     public void BackToMenuYes()
     {
@@ -54,6 +68,13 @@ public class PauseMenuButton : MonoBehaviour
     }
     public void No()
     {
-        GameManager.pauseMenuState = "No";
+        if(GameManager.gameState == "PauseMenu")
+        {
+            GameManager.pauseMenuState = "No";
+        }
+        else if(GameManager.gameState == "Goal")
+        {
+            GameManager.stageClearMenuState = "No";
+        }
     }
 }

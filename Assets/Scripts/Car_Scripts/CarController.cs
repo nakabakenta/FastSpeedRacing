@@ -185,11 +185,8 @@ public class CarController : MonoBehaviour
 
             foreach (WheelInfo wheelInfo in wheelInfo)
             {
-                if (wheelInfo.useSideBrake == true)
-                {
-                    wheelInfo.wcLeft.brakeTorque = brake;
-                    wheelInfo.wcRight.brakeTorque = brake;
-                }
+                wheelInfo.wcLeft.brakeTorque = brake;
+                wheelInfo.wcRight.brakeTorque = brake;
             }
         }
     }
