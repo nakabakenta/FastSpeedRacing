@@ -184,10 +184,9 @@ public class Stage : MonoBehaviour
     }
     void Goal()
     {
-        stageInfo.objGoal.SetActive(true);
-
         if (GameManager.gameState == "Goal" && GameManager.stageClearMenuState == "Null")
         {
+            stageInfo.objGoal.SetActive(true);
             Invoke("GoalMenu", 3.0f);
         }
 
