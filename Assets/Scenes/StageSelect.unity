@@ -133,12 +133,12 @@ GameObject:
   m_Component:
   - component: {fileID: 188473207}
   m_Layer: 0
-  m_Name: RETURN MENU
+  m_Name: PauseMenu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &188473207
 Transform:
   m_ObjectHideFlags: 0
@@ -2568,7 +2568,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stageSelectInfo:
-    objReturnMenu: {fileID: 188473206}
+    objPauseMenu: {fileID: 188473206}
     objFirstButtonSelect: {fileID: 1345224468}
     objButtonYes: {fileID: 1688878338}
     objButtonNo: {fileID: 2111752160}

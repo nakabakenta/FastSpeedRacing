@@ -13,26 +13,26 @@ public class StageSelect : MonoBehaviour
     {
         GameManager.nowScene = "StageSelect";
         GameManager.stageSelectState = "MainMenu";
-        GameManager.returnMenuState = "Null";
-        stageSelectInfo.objReturnMenu.SetActive(false);
+        GameManager.pauseMenuState = "Null";
+        stageSelectInfo.objPauseMenu.SetActive(false);
     }
     // Update is called once per frame
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape) && GameManager.stageSelectState == "MainMenu" 
-            && GameManager.returnMenuState == "Null")
+            && GameManager.pauseMenuState == "Null")
         {
-            GameManager.stageSelectState = "ReturnMenu";
-            GameManager.returnMenuState = "Exist";
-            stageSelectInfo.objReturnMenu.SetActive(true);
+            GameManager.stageSelectState = "PauseMenu";
+            GameManager.pauseMenuState = "Exist";
+            stageSelectInfo.objPauseMenu.SetActive(true);
             EventSystem.current.SetSelectedGameObject(stageSelectInfo.objButtonYes);
         }
 
-        if(GameManager.returnMenuState == "No")
+        if(GameManager.pauseMenuState == "No")
         {
             GameManager.stageSelectState = "MainMenu";
-            GameManager.returnMenuState = "Null";
-            stageSelectInfo.objReturnMenu.SetActive(false);
+            GameManager.pauseMenuState = "Null";
+            stageSelectInfo.objPauseMenu.SetActive(false);
             EventSystem.current.SetSelectedGameObject(stageSelectInfo.objFirstButtonSelect);
         }
     }
@@ -41,7 +41,7 @@ public class StageSelect : MonoBehaviour
 [System.Serializable]
 public class StageSelectInfo
 {
-    public GameObject objReturnMenu;
+    public GameObject objPauseMenu;
     public GameObject objFirstButtonSelect;
     public GameObject objButtonYes;
     public GameObject objButtonNo;

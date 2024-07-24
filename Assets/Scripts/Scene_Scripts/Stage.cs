@@ -8,10 +8,9 @@ using TMPro;
 public class Stage : MonoBehaviour
 {
     private Rigidbody rb;
-    private float countdown;
+    private float text;
     private float timer;
     private string saveState;
-
     public StageInfo stageInfo;
 
     // Start is called before the first frame update
@@ -22,34 +21,33 @@ public class Stage : MonoBehaviour
         GameManager.gameState = "Countdown";
         GameManager.countdownState = "Exist";
         GameManager.pauseMenuState = "Null";
+        GameManager.stageClearMenuState = "Null";
+        GameManager.nextStageMenuState = "Null";
         GameManager.controlGuideMenuState = "Null";
         GameManager.restartMenuState = "Null";
         GameManager.backToMenuState = "Null";
-        GameManager.stageClearMenuState = "Null";
-
-        stageInfo.objCountdown.SetActive(true);
-        stageInfo.objGoal.SetActive(false);
+        stageInfo.objNowState.SetActive(true);
         stageInfo.objPauseMenu.SetActive(false);
+        stageInfo.objStageClearMenu.SetActive(false);
+        stageInfo.objNextStageMenu.SetActive(false);
         stageInfo.objControlGuideMenu.SetActive(false);
         stageInfo.objRestartMenu.SetActive(false);
         stageInfo.objBackToMenu.SetActive(false);
-        stageInfo.objStageClearMenu.SetActive(false);
-        countdown = 4;
+        text = 4;
         timer = 0;
     }
     // Update is called once per frame
     void Update()
     {
-        if(GameManager.countdownState == "Exist" || GameManager.countdownState == "Go" 
-            && GameManager.pauseMenuState == "Null")
+        if(GameManager.countdownState == "Exist")
         {
             Countdown();
         }
-        if (GameManager.gameState == "Playing" && GameManager.pauseMenuState == "Null")
+        if (GameManager.gameState == "Playing")
         {
             Timer();
         }
-        if (GameManager.countdownState == "Exist" || GameManager.countdownState == "Go" 
+        if (GameManager.countdownState == "Exist" || GameManager.countdownState == "Null"
             && GameManager.gameState != "Goal")
         {
             PauseMenu();
@@ -65,23 +63,22 @@ public class Stage : MonoBehaviour
     }
     void Countdown()
     {
-        countdown -= Time.deltaTime;
-        int second = (int)countdown;
+        text -= Time.deltaTime;
+        int second = (int)text;
 
         if(second > 0 && GameManager.countdownState == "Exist")
         {
-            stageInfo.textCountdown.text = second.ToString();
+            stageInfo.textNowState.text = second.ToString();
+        }
+        else if (second <= -2 && GameManager.countdownState == "Exist")
+        {
+            stageInfo.objNowState.SetActive(false);
+            GameManager.countdownState = "Null";
         }
         else if (second <= 0 && GameManager.countdownState == "Exist")
         {
-            stageInfo.textCountdown.text = "GO!!";
+            stageInfo.textNowState.text = "GO!!";
             GameManager.gameState = "Playing";
-            GameManager.countdownState = "Go";
-        }
-        else if (second <= -2 && GameManager.countdownState == "Go")
-        {
-            stageInfo.objCountdown.SetActive(false);
-            GameManager.countdownState = "Null";
         }
     }
     void Timer()
@@ -118,7 +115,7 @@ public class Stage : MonoBehaviour
             msecText = msecond.ToString();
         }
 
-        stageInfo.textNowTimer.text = "NowTime : " + minText + "." + secText + "." + msecText;
+        stageInfo.textNowRecord.text = "NowTime : " + minText + "." + secText + "." + msecText;
     }
     void PauseMenu()
     {
@@ -186,8 +183,20 @@ public class Stage : MonoBehaviour
     {
         if (GameManager.gameState == "Goal" && GameManager.stageClearMenuState == "Null")
         {
-            stageInfo.objGoal.SetActive(true);
+            stageInfo.objNowRecord.SetActive(false);
+            stageInfo.objTopRecord.SetActive(false);
+            stageInfo.objSpeedMeter.SetActive(false);
+            stageInfo.objNowState.SetActive(true);
+            stageInfo.textNowState.text = "GOAL!!";
             Invoke("GoalMenu", 3.0f);
+        }
+
+        if (GameManager.stageClearMenuState == "NextStage" && GameManager.nextStageMenuState == "Null")
+        {
+            GameManager.nextStageMenuState = "Exist";
+            stageInfo.objStageClearMenu.SetActive(false);
+            stageInfo.objNextStageMenu.SetActive(true);
+            EventSystem.current.SetSelectedGameObject(stageInfo.objNextStageMenuFirstButtonSelect);
         }
 
         if (GameManager.stageClearMenuState == "Restart" && GameManager.restartMenuState == "Null")
@@ -208,9 +217,11 @@ public class Stage : MonoBehaviour
 
         if (GameManager.stageClearMenuState == "No")
         {
-            GameManager.stageClearMenuState = "Exist";
+            GameManager.nextStageMenuState = "Null";
             GameManager.restartMenuState = "Null";
             GameManager.backToMenuState = "Null";
+            GameManager.stageClearMenuState = "Exist";
+            stageInfo.objNextStageMenu.SetActive(false);
             stageInfo.objRestartMenu.SetActive(false);
             stageInfo.objBackToMenu.SetActive(false);
             stageInfo.objStageClearMenu.SetActive(true);
@@ -219,7 +230,7 @@ public class Stage : MonoBehaviour
     }
     void GoalMenu()
     {
-        stageInfo.objGoal.SetActive(false);
+        stageInfo.objNowState.SetActive(false);
 
         if (GameManager.stageClearMenuState == "Null")
         {
@@ -234,19 +245,23 @@ public class Stage : MonoBehaviour
 public class StageInfo
 {
     public GameObject objTargetCar;
-    public GameObject objCountdown;
-    public GameObject objGoal;
+    public GameObject objNowState;
+    public GameObject objNowRecord;
+    public GameObject objTopRecord;
+    public GameObject objSpeedMeter;
     public GameObject objPauseMenu;
     public GameObject objPauseMenuFirstButtonSelect;
+    public GameObject objStageClearMenu;
+    public GameObject objStageClearMenuFirstButtonSelect;
+    public GameObject objNextStageMenu;
+    public GameObject objNextStageMenuFirstButtonSelect;
     public GameObject objControlGuideMenu;
     public GameObject objRestartMenu;
     public GameObject objRestartMenuFirstButtonSelect;
     public GameObject objBackToMenu;
     public GameObject objBackToMenuFirstButtonSelect;
-    public GameObject objStageClearMenu;
-    public GameObject objStageClearMenuFirstButtonSelect;
-
-    public TMP_Text textCountdown;
-    public TMP_Text textNowTimer;
+    public TMP_Text textNowState;
+    public TMP_Text textNowRecord;
+    public TMP_Text textTopRecord;
     public TMP_Text textSpeedMeter;
 }

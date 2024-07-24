@@ -20,7 +20,7 @@ public class StageSelectButton : MonoBehaviour
         {
             button.interactable = true;
         }
-        else if(GameManager.stageSelectState == "ReturnMenu")
+        else if(GameManager.stageSelectState == "PauseMenu")
         {
             button.interactable = false;
         }
