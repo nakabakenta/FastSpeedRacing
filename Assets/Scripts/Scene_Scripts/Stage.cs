@@ -8,8 +8,14 @@ using TMPro;
 public class Stage : MonoBehaviour
 {
     private Rigidbody rb;
+    private int minute;
+    private int second;
+    private int msecond;
     private float text;
     private float timer;
+    private string textMinute;
+    private string textSecond;
+    private string textMsecond;
     private string saveState;
     public StageInfo stageInfo;
 
@@ -34,7 +40,6 @@ public class Stage : MonoBehaviour
         stageInfo.objRestartMenu.SetActive(false);
         stageInfo.objBackToMenu.SetActive(false);
         text = 4;
-        timer = 0;
     }
     // Update is called once per frame
     void Update()
@@ -64,7 +69,7 @@ public class Stage : MonoBehaviour
     void Countdown()
     {
         text -= Time.deltaTime;
-        int second = (int)text;
+        second = (int)text;
 
         if(second > 0 && GameManager.countdownState == "Exist")
         {
@@ -84,38 +89,37 @@ public class Stage : MonoBehaviour
     void Timer()
     {
         timer += Time.deltaTime;
-        int minute = (int)timer / 60;
-        int second = (int)timer % 60;
-        int msecond = (int)(timer * 100 % 100);
-        string minText, secText, msecText;
+        minute = (int)timer / 60;
+        second = (int)timer % 60;
+        msecond = (int)(timer * 100 % 100);
         if (minute < 10)
         {
-            minText = "0" + minute.ToString();
+            textMinute = "0" + minute.ToString();
         }
         else
         {
-            minText = minute.ToString();
+            textMinute = minute.ToString();
         }
 
         if (second < 10)
         {
-            secText = "0" + second.ToString();
+            textSecond = "0" + second.ToString();
         }
         else
         {
-            secText = second.ToString();
+            textSecond = second.ToString();
         }
 
         if (msecond < 10)
         {
-            msecText = "0" + msecond.ToString();
+            textMsecond = "0" + msecond.ToString();
         }
         else
         {
-            msecText = msecond.ToString();
+            textMsecond = msecond.ToString();
         }
 
-        stageInfo.textNowRecord.text = "NowTime : " + minText + "." + secText + "." + msecText;
+        stageInfo.textNowRecord.text = "NowTime : " + textMinute + "." + textSecond + "." + textMsecond;
     }
     void PauseMenu()
     {
@@ -181,6 +185,49 @@ public class Stage : MonoBehaviour
     }
     void Goal()
     {
+        stageInfo.textClearRecord.text = "ClearRecord : " + textMinute + "." + textSecond + "." + textMsecond;
+
+        if (GameManager.nowStage == "Stage01")
+        {
+            if (minute <= GameManager.minute[0, 0])
+            {
+                //GameManager.textMinute = textMinute;
+                stageInfo.textRecord[0].text = "1st : " + textMinute + "." + textSecond + "." + textMsecond;
+            }
+            else if (minute <= GameManager.minute[0, 1])
+            {
+                stageInfo.textRecord[1].text = "2nd : " + textMinute + "." + textSecond + "." + textMsecond;
+            }
+            else if (minute <= GameManager.minute[0, 2])
+            {
+                stageInfo.textRecord[2].text = "3nd : " + textMinute + "." + textSecond + "." + textMsecond;
+            }
+
+
+
+
+
+
+
+            else if (msecond <= GameManager.msecond[0, 0])
+            {
+
+                //stageInfo.textRecord[i].text = "2nd : " + textMinute + "." + textSecond + "." + textMsecond;
+                //stageInfo.textRecord[i].text = "3rd : " + textMinute + "." + textSecond + "." + textMsecond;
+                //stageInfo.textRecord[i].text = "4th : " + textMinute + "." + textSecond + "." + textMsecond;
+                //stageInfo.textRecord[i].text = "5th : " + textMinute + "." + textSecond + "." + textMsecond;
+                //stageInfo.textRecord[i].text = "6th : " + textMinute + "." + textSecond + "." + textMsecond;
+                //stageInfo.textRecord[i].text = "7th : " + textMinute + "." + textSecond + "." + textMsecond;
+                //stageInfo.textRecord[i].text = "8th : " + textMinute + "." + textSecond + "." + textMsecond;
+                //stageInfo.textRecord[i].text = "9th : " + textMinute + "." + textSecond + "." + textMsecond;
+                //stageInfo.textRecord[i].text = "10th : " + textMinute + "." + textSecond + "." + textMsecond;
+            }
+            else if (second <= GameManager.second[0, 0])
+            {
+
+            }
+        }
+
         if (GameManager.gameState == "Goal" && GameManager.stageClearMenuState == "Null")
         {
             stageInfo.objNowRecord.SetActive(false);
@@ -264,4 +311,6 @@ public class StageInfo
     public TMP_Text textNowRecord;
     public TMP_Text textTopRecord;
     public TMP_Text textSpeedMeter;
+    public TMP_Text[] textRecord = new TMP_Text[10];
+    public TMP_Text textClearRecord;
 }
