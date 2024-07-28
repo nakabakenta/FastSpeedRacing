@@ -8,24 +8,23 @@ using TMPro;
 public class Stage : MonoBehaviour
 {
     private Rigidbody rb;
-    private int minute;
-    private int second;
-    private int msecond;
     private float text;
     private float timer;
-    private string textMinute;
-    private string textSecond;
-    private string textMsecond;
+    private string textMinute, textSecond, textMsecond;
+    private string countdownState;
     private string saveState;
+    public static int minute, second, msecond;
+    public static bool setRanking;
     public StageInfo stageInfo;
 
     // Start is called before the first frame update
     void Start()
     {
         rb = stageInfo.objTargetCar.GetComponent<Rigidbody>();
+        countdownState = "Exist";
+        setRanking = false;
         GameManager.nowScene = "Stage";
         GameManager.gameState = "Countdown";
-        GameManager.countdownState = "Exist";
         GameManager.pauseMenuState = "Null";
         GameManager.stageClearMenuState = "Null";
         GameManager.nextStageMenuState = "Null";
@@ -44,7 +43,7 @@ public class Stage : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(GameManager.countdownState == "Exist")
+        if (countdownState == "Exist")
         {
             Countdown();
         }
@@ -52,7 +51,7 @@ public class Stage : MonoBehaviour
         {
             Timer();
         }
-        if (GameManager.countdownState == "Exist" || GameManager.countdownState == "Null"
+        if (countdownState == "Exist" || countdownState == "Null"
             && GameManager.gameState != "Goal")
         {
             PauseMenu();
@@ -71,16 +70,16 @@ public class Stage : MonoBehaviour
         text -= Time.deltaTime;
         second = (int)text;
 
-        if(second > 0 && GameManager.countdownState == "Exist")
+        if (second > 0 && countdownState == "Exist")
         {
             stageInfo.textNowState.text = second.ToString();
         }
-        else if (second <= -2 && GameManager.countdownState == "Exist")
+        else if (second <= -2 && countdownState == "Exist")
         {
             stageInfo.objNowState.SetActive(false);
-            GameManager.countdownState = "Null";
+            countdownState = "Null";
         }
-        else if (second <= 0 && GameManager.countdownState == "Exist")
+        else if (second <= 0 && countdownState == "Exist" && GameManager.gameState != "PauseMenu")
         {
             stageInfo.textNowState.text = "GO!!";
             GameManager.gameState = "Playing";
@@ -92,6 +91,7 @@ public class Stage : MonoBehaviour
         minute = (int)timer / 60;
         second = (int)timer % 60;
         msecond = (int)(timer * 100 % 100);
+        //•ª
         if (minute < 10)
         {
             textMinute = "0" + minute.ToString();
@@ -100,7 +100,7 @@ public class Stage : MonoBehaviour
         {
             textMinute = minute.ToString();
         }
-
+        //•b
         if (second < 10)
         {
             textSecond = "0" + second.ToString();
@@ -109,7 +109,7 @@ public class Stage : MonoBehaviour
         {
             textSecond = second.ToString();
         }
-
+        //ƒ~ƒŠ•b
         if (msecond < 10)
         {
             textMsecond = "0" + msecond.ToString();
@@ -187,47 +187,6 @@ public class Stage : MonoBehaviour
     {
         stageInfo.textClearRecord.text = "ClearRecord : " + textMinute + "." + textSecond + "." + textMsecond;
 
-        if (GameManager.nowStage == "Stage01")
-        {
-            if (minute <= GameManager.minute[0, 0])
-            {
-                //GameManager.textMinute = textMinute;
-                stageInfo.textRecord[0].text = "1st : " + textMinute + "." + textSecond + "." + textMsecond;
-            }
-            else if (minute <= GameManager.minute[0, 1])
-            {
-                stageInfo.textRecord[1].text = "2nd : " + textMinute + "." + textSecond + "." + textMsecond;
-            }
-            else if (minute <= GameManager.minute[0, 2])
-            {
-                stageInfo.textRecord[2].text = "3nd : " + textMinute + "." + textSecond + "." + textMsecond;
-            }
-
-
-
-
-
-
-
-            else if (msecond <= GameManager.msecond[0, 0])
-            {
-
-                //stageInfo.textRecord[i].text = "2nd : " + textMinute + "." + textSecond + "." + textMsecond;
-                //stageInfo.textRecord[i].text = "3rd : " + textMinute + "." + textSecond + "." + textMsecond;
-                //stageInfo.textRecord[i].text = "4th : " + textMinute + "." + textSecond + "." + textMsecond;
-                //stageInfo.textRecord[i].text = "5th : " + textMinute + "." + textSecond + "." + textMsecond;
-                //stageInfo.textRecord[i].text = "6th : " + textMinute + "." + textSecond + "." + textMsecond;
-                //stageInfo.textRecord[i].text = "7th : " + textMinute + "." + textSecond + "." + textMsecond;
-                //stageInfo.textRecord[i].text = "8th : " + textMinute + "." + textSecond + "." + textMsecond;
-                //stageInfo.textRecord[i].text = "9th : " + textMinute + "." + textSecond + "." + textMsecond;
-                //stageInfo.textRecord[i].text = "10th : " + textMinute + "." + textSecond + "." + textMsecond;
-            }
-            else if (second <= GameManager.second[0, 0])
-            {
-
-            }
-        }
-
         if (GameManager.gameState == "Goal" && GameManager.stageClearMenuState == "Null")
         {
             stageInfo.objNowRecord.SetActive(false);
@@ -281,6 +240,7 @@ public class Stage : MonoBehaviour
 
         if (GameManager.stageClearMenuState == "Null")
         {
+            setRanking = true;
             GameManager.stageClearMenuState = "Exist";
             stageInfo.objStageClearMenu.SetActive(true);
             EventSystem.current.SetSelectedGameObject(stageInfo.objStageClearMenuFirstButtonSelect);
@@ -311,6 +271,5 @@ public class StageInfo
     public TMP_Text textNowRecord;
     public TMP_Text textTopRecord;
     public TMP_Text textSpeedMeter;
-    public TMP_Text[] textRecord = new TMP_Text[10];
     public TMP_Text textClearRecord;
 }

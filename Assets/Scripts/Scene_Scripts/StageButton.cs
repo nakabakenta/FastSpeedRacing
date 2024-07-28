@@ -17,24 +17,24 @@ public class StageButton : MonoBehaviour
     {
         Time.timeScale = 1;
 
-        if (GameManager.nowStage == "Stage01")
+        if (GameManager.nowStage == 1)
         {
-            GameManager.nowStage = "Stage02";
+            GameManager.nowStage = 2;
             SceneManager.LoadScene("Stage02");
         }
-        else if (GameManager.nowStage == "Stage02")
+        else if (GameManager.nowStage == 2)
         {
-            GameManager.nowStage = "Stage03";
+            GameManager.nowStage = 3;
             SceneManager.LoadScene("Stage03");
         }
-        else if (GameManager.nowStage == "Stage03")
+        else if (GameManager.nowStage == 3)
         {
-            GameManager.nowStage = "Stage04";
+            GameManager.nowStage = 4;
             SceneManager.LoadScene("Stage04");
         }
-        else if (GameManager.nowStage == "Stage04")
+        else if (GameManager.nowStage == 4)
         {
-            GameManager.nowStage = "Stage05";
+            GameManager.nowStage = 5;
             SceneManager.LoadScene("Stage05");
         }
     }
@@ -57,23 +57,23 @@ public class StageButton : MonoBehaviour
     {
         Time.timeScale = 1;
 
-        if (GameManager.nowStage == "Stage01")
+        if (GameManager.nowStage == 1)
         {
             SceneManager.LoadScene("Stage01");
         }
-        else if(GameManager.nowStage == "Stage02")
+        else if(GameManager.nowStage == 2)
         {
             SceneManager.LoadScene("Stage02");
         }
-        else if (GameManager.nowStage == "Stage03")
+        else if (GameManager.nowStage == 3)
         {
             SceneManager.LoadScene("Stage03");
         }
-        else if (GameManager.nowStage == "Stage04")
+        else if (GameManager.nowStage == 4)
         {
             SceneManager.LoadScene("Stage04");
         }
-        else if (GameManager.nowStage == "Stage05")
+        else if (GameManager.nowStage == 5)
         {
             SceneManager.LoadScene("Stage05");
         }

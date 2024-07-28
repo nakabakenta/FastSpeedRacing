@@ -674,7 +674,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1690285897437035886}
   m_Layer: 0
-  m_Name: "AE86\u30C8\u30EC\u30CE"
+  m_Name: "Obj_AE86\u30C8\u30EC\u30CE"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

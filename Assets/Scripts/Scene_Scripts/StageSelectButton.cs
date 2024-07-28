@@ -27,27 +27,27 @@ public class StageSelectButton : MonoBehaviour
     }
     public void LoadStage01()
     {
+        GameManager.nowStage = 1;
         SceneManager.LoadScene("Stage01");
-        GameManager.nowStage = "Stage01";
     }
     public void LoadStage02()
     {
+        GameManager.nowStage = 2;
         SceneManager.LoadScene("Stage02");
-        GameManager.nowStage = "Stage02";
     }
     public void LoadStage03()
     {
+        GameManager.nowStage = 3;
         SceneManager.LoadScene("Stage03");
-        GameManager.nowStage = "Stage03";
     }
     public void LoadStage04()
     {
+        GameManager.nowStage = 4;
         SceneManager.LoadScene("Stage04");
-        GameManager.nowStage = "Stage04";
     }
     public void LoadStage05()
     {
+        GameManager.nowStage = 5;
         SceneManager.LoadScene("Stage05");
-        GameManager.nowStage = "Stage05";
     }
 }
