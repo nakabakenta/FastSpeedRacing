@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8948666497197766104}
   - component: {fileID: 5813692402679921993}
   - component: {fileID: 8567420574289363763}
+  - component: {fileID: 63054299847948153}
   m_Layer: 0
   m_Name: Road
   m_TagString: Untagged
@@ -83,6 +84,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &63054299847948153
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3379712086128490554}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -8634060567236447461, guid: 006b6386b2c0c2445938b2c98c2fb696, type: 3}
 --- !u!1 &3532129889602961144
 GameObject:
   m_ObjectHideFlags: 0
@@ -93,7 +108,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4201706475739063362}
   m_Layer: 0
-  m_Name: "\u9AD8\u901F\u9053\u8DEF_4m\xD75m_002"
+  m_Name: "\u9AD8\u901F\u9053\u8DEF_4m\xD75m(\u767D\u7DDA3m)_001"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -127,6 +142,7 @@ GameObject:
   - component: {fileID: 695760435341552907}
   - component: {fileID: 8660341400845260813}
   - component: {fileID: 6138667146957682514}
+  - component: {fileID: 4646803824358027799}
   m_Layer: 0
   m_Name: Wall
   m_TagString: Untagged
@@ -199,3 +215,17 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &4646803824358027799
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6569907596142295504}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 8733429697405204941, guid: 006b6386b2c0c2445938b2c98c2fb696, type: 3}
