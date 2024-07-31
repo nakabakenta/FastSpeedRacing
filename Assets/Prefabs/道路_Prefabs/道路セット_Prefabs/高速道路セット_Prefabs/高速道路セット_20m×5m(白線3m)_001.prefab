@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 483393723793181195}
   m_Layer: 0
-  m_Name: "\u9AD8\u901F\u9053\u8DEF_20m\xD75m(\u767D\u7DDA3m)_001"
+  m_Name: "\u9AD8\u901F\u9053\u8DEF\u30BB\u30C3\u30C8_20m\xD75m(\u767D\u7DDA3m)_001"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -86,7 +86,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5470534177292159389, guid: 01eccaf725978d441b70d4a61c8689f2, type: 3}
       propertyPath: m_Name
-      value: "\u9AD8\u901F\u9053\u8DEF_10m\xD75m(\u767D\u7DDA3m)_001"
+      value: "\u9AD8\u901F\u9053\u8DEF\u30BB\u30C3\u30C8_10m\xD75m(\u767D\u7DDA3m)_001"
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 01eccaf725978d441b70d4a61c8689f2, type: 3}
@@ -148,7 +148,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5470534177292159389, guid: 01eccaf725978d441b70d4a61c8689f2, type: 3}
       propertyPath: m_Name
-      value: "\u9AD8\u901F\u9053\u8DEF_10m\xD75m(\u767D\u7DDA3m)_001"
+      value: "\u9AD8\u901F\u9053\u8DEF\u30BB\u30C3\u30C8_10m\xD75m(\u767D\u7DDA3m)_001"
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 01eccaf725978d441b70d4a61c8689f2, type: 3}
