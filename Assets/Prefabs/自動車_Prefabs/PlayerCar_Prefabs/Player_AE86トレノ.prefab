@@ -572,7 +572,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4027306772958372475}
   - component: {fileID: 4027306772958372473}
-  - component: {fileID: 4027306772958372478}
+  - component: {fileID: 6181529347078772693}
+  - component: {fileID: 7549200222826184815}
   - component: {fileID: 4027306772958372472}
   - component: {fileID: 4027306772958372450}
   - component: {fileID: 4027306772958372477}
@@ -623,7 +624,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!65 &4027306772958372478
+--- !u!65 &6181529347078772693
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -634,8 +635,21 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.565, y: 1.135, z: 4.22}
-  m_Center: {x: 0, y: 0.7675, z: -0.07}
+  m_Size: {x: 1.305, y: 0.435, z: 1.84}
+  m_Center: {x: 0, y: 1.1175, z: -0.58}
+--- !u!65 &7549200222826184815
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4027306772958372469}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.535, y: 0.65, z: 4.22}
+  m_Center: {x: 0, y: 0.575, z: -0.07}
 --- !u!114 &4027306772958372472
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -653,7 +667,7 @@ MonoBehaviour:
     maxTorque: 0
     upTorque: 500
     downTorque: 10000
-    steeringAngle: 20
+    steeringAngle: 30
     useRHL: 1
   wheelInfo:
   - trLeft: {fileID: 4027306772395266366}

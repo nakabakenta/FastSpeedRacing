@@ -8,7 +8,7 @@ using TMPro;
 public class Stage : MonoBehaviour
 {
     private Rigidbody rb;
-    private float text;
+    private float countdown;
     private float timer;
     private string textMinute, textSecond, textMsecond;
     private string countdownState;
@@ -38,7 +38,8 @@ public class Stage : MonoBehaviour
         stageInfo.objControlGuideMenu.SetActive(false);
         stageInfo.objRestartMenu.SetActive(false);
         stageInfo.objBackToMenu.SetActive(false);
-        text = 4;
+        stageInfo.textTopRecord.text = "TopRecord : " + RankingManager.textMinute[GameManager.nowStage - 1, 0] + "." + RankingManager.textSecond[GameManager.nowStage - 1, 0] + "." + RankingManager.textMsecond[GameManager.nowStage - 1, 0];
+        countdown = 4;
     }
     // Update is called once per frame
     void Update()
@@ -63,12 +64,12 @@ public class Stage : MonoBehaviour
     }
     void FixedUpdate()
     {
-        stageInfo.textSpeedMeter.text = Mathf.Floor(rb.velocity.magnitude * 10) / 10 + " Km/h";
+        stageInfo.textSpeedMeter.text = Mathf.Floor(rb.velocity.magnitude * 3.0f * 10) / 10 + " Km/h";
     }
     void Countdown()
     {
-        text -= Time.deltaTime;
-        second = (int)text;
+        countdown -= Time.deltaTime;
+        second = (int)countdown;
 
         if (second > 0 && countdownState == "Exist")
         {
