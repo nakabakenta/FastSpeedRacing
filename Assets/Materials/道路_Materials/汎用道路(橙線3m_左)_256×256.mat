@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: "\u4E00\u822C\u9053\u8DEF_5.25m\xD75.25m_\u524D\u5F8C001"
+  m_Name: "\u6C4E\u7528\u9053\u8DEF(\u6A59\u7DDA3m_\u5DE6)_256\xD7256"
   m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
   m_ValidKeywords: []
   m_InvalidKeywords: []
@@ -41,7 +41,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: de66570297a0c2a48a4105c5b4c23830, type: 3}
+        m_Texture: {fileID: 2800000, guid: 7129adfc9822e8848bdf21a49d3b297b, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
