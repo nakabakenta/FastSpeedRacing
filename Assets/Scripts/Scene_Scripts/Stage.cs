@@ -8,6 +8,7 @@ using TMPro;
 public class Stage : MonoBehaviour
 {
     private Rigidbody rb;
+    private AudioSource audioSource;
     private float countdown;
     private float timer;
     private string textMinute, textSecond, textMsecond;
@@ -21,6 +22,7 @@ public class Stage : MonoBehaviour
     void Start()
     {
         rb = stageInfo.objTargetCar.GetComponent<Rigidbody>();
+        audioSource = this.GetComponent<AudioSource>();
         countdownState = "Exist";
         setRanking = false;
         GameManager.nowScene = "Stage";
@@ -40,6 +42,7 @@ public class Stage : MonoBehaviour
         stageInfo.objBackToMenu.SetActive(false);
         stageInfo.textTopRecord.text = "TopRecord : " + RankingManager.textMinute[GameManager.nowStage - 1, 0] + "." + RankingManager.textSecond[GameManager.nowStage - 1, 0] + "." + RankingManager.textMsecond[GameManager.nowStage - 1, 0];
         countdown = 4;
+        StartCoroutine("StartSound");
     }
     // Update is called once per frame
     void Update()
@@ -85,6 +88,15 @@ public class Stage : MonoBehaviour
             stageInfo.textNowState.text = "GO!!";
             GameManager.gameState = "Playing";
         }
+    }
+    IEnumerator StartSound()
+    {
+        for (int i = 0; i < 3; i++)
+        {
+            audioSource.PlayOneShot(stageInfo.countdown);
+            yield return new WaitForSeconds(1);
+        }
+        audioSource.PlayOneShot(stageInfo.start);
     }
     void Timer()
     {
@@ -273,4 +285,6 @@ public class StageInfo
     public TMP_Text textTopRecord;
     public TMP_Text textSpeedMeter;
     public TMP_Text textClearRecord;
+    public AudioClip countdown;
+    public AudioClip start;
 }

@@ -1,13 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 
-public class TextOption : MonoBehaviour
+public class UIOption : MonoBehaviour
 {
     private TMP_Text text;
 
-    public TextOptionInfo textOptionInfo;//使用するテキスト設定
+    public UIOptionInfo textOptionInfo;//使用するテキスト設定
 
     // Start is called before the first frame update
     void Start()
@@ -40,7 +41,7 @@ public class TextOption : MonoBehaviour
 }
 
 [System.Serializable]
-public class TextOptionInfo
+public class UIOptionInfo
 {
     public bool textFlashing;//テキストの点滅
 }
